@@ -1,3 +1,5 @@
+
+
 import axios from "axios";
 import Notiflix from "notiflix";
 import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";
@@ -5,7 +7,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 
-const simple = new SimpleLightbox('.gallery a', { 
+const simple = new SimpleLightbox('.gallery .link', { 
     captionsData: 'alt',
     captionPosition : 'bottom',
     captionDelay : 250,
@@ -28,7 +30,7 @@ async function  onSubmit(evt){
         const response = await axios.get(`${BASE_URL}q=${input.value}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=1`);
         const data = await response.data;  
        if(data.hits.length > 0){
-          await createMarkup(data.hits);
+           createMarkup(data.hits);
           console.log(data)
        }else{
         Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
@@ -43,8 +45,8 @@ async function  onSubmit(evt){
 async function createMarkup(mass){
     
     
-    const markup =  await mass.map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => {
-        return `<a href="${largeImageURL}" alt="${tags}"><div class="photo-card">
+    const markup = mass.map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => {
+        return `<a href="${largeImageURL}" alt="${tags}" class='link'><div class="photo-card">
         <img src="${webformatURL}" alt="${tags}" loading="lazy" class="card-image"/>
         <div class="info">
           <p class="info-item">
@@ -62,11 +64,8 @@ async function createMarkup(mass){
         </div>
       </div></a>`
     }).join('');
-     gallery.innerHTML += await markup;
-     
-    
+     gallery.innerHTML += markup;
+     SimpleLightbox.refresh();
 }
 
-console.log('why')
-
-
+console.log('hello')
