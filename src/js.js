@@ -78,7 +78,7 @@ async function onClick(evt){
         Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
         loadMore.setAttribute('hidden', 'true')
 }}catch (err){
-  console.log(err)
+  Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
 }
 }
 
