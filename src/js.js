@@ -21,6 +21,7 @@ let lightbox = new SimpleLightbox('.gallery a',{
   captionDelay : 250
 });
 
+console.log('hello')
 
 form.addEventListener('submit', onSubmitSearch);
 loadMore.addEventListener('click', onClick)
@@ -64,7 +65,7 @@ async function createMarkup(mass){
 }
 
 async function onClick(evt){
-    evt.preventDefault();
+    try{evt.preventDefault();
     page += 1;
     console.log(page)
     lightbox.refresh();
@@ -75,6 +76,9 @@ async function onClick(evt){
 
     }else if(page > Math.ceil(data.total/40)){
         Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
+        loadMore.setAttribute('hidden', 'true')
+}}catch (err){
+  console.log(err)
 }
 }
 
