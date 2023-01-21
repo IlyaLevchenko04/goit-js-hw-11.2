@@ -26,7 +26,7 @@ console.log('hello')
 form.addEventListener('submit', onSubmitSearch);
 loadMore.addEventListener('click', onClick)
 
-async function API(page){
+async function PixabayAPI(page){
     try{
         const response = await axios.get(`${BASE_URL}q=${input.value}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${page}`);
         const data = await response.data;
@@ -38,7 +38,7 @@ async function API(page){
     
 }
 
-async function createMarkup(mass){
+ function createMarkup(mass){
     
     
     const markup = mass.map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => {
@@ -69,9 +69,9 @@ async function onClick(evt){
     page += 1;
     console.log(page)
     lightbox.refresh();
-    const data = await API(page);
+    const data = await PixabayAPI(page);
     if(page <= Math.ceil(data.total/40)){
-      await createMarkup(data.hits)
+       createMarkup(data.hits)
       console.log('if', Math.ceil(data.total/40))
 
     }else if(page > Math.ceil(data.total/40)){
@@ -85,7 +85,7 @@ async function onClick(evt){
 async function onSubmitSearch(evt){
     try{evt.preventDefault();
     page = 1;
-    const data = await API(page);
+    const data = await PixabayAPI(page);
     lightbox.refresh();
     if(input.value === ''){
       throw new Error();
