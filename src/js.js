@@ -20,7 +20,7 @@ let lightbox = new SimpleLightbox('.gallery a',{
   captionPosition : 'bottom',
   captionDelay : 250
 });
-lightbox.refresh();
+
 
 form.addEventListener('submit', onSubmitSearch);
 loadMore.addEventListener('click', onClick)
@@ -74,7 +74,6 @@ async function onClick(evt){
       console.log('if', Math.ceil(data.total/40))
 
     }else if(page > Math.ceil(data.total/40)){
-        console.log('else if', Math.ceil(data.total/40))
         Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
 }
 }
@@ -122,4 +121,5 @@ function createOneMarkup(mass){
   </div></a>`
 }).join('');
  gallery.innerHTML = markup;
+ lightbox.refresh();
 }

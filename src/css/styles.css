@@ -60,3 +60,10 @@ div{
     align-items: center;
     gap: 5px;
 }
+
+.load-more{
+    height: 30px;
+    width: 50px;
+    background-color: antiquewhite;
+    margin-left: auto;
+}
