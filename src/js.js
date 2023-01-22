@@ -21,7 +21,7 @@ let lightbox = new SimpleLightbox('.gallery a',{
   captionDelay : 250
 });
 
-console.log('hello')
+
 
 form.addEventListener('submit', onSubmitSearch);
 loadMore.addEventListener('click', onClick)
@@ -67,14 +67,12 @@ async function PixabayAPI(page){
 async function onClick(evt){
     try{evt.preventDefault();
     page += 1;
-    console.log(page)
-    lightbox.refresh();
+    console.log(page);
     const data = await PixabayAPI(page);
     if(page <= Math.ceil(data.total/40)){
        createMarkup(data.hits)
       console.log('if', Math.ceil(data.total/40))
-
-    }else if(page > Math.ceil(data.total/40)){
+    }else if(page >= Math.ceil(data.total/40)){
         Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
         loadMore.setAttribute('hidden', 'true')
 }}catch (err){
@@ -127,3 +125,5 @@ function createOneMarkup(mass){
  gallery.innerHTML = markup;
  lightbox.refresh();
 }
+
+
